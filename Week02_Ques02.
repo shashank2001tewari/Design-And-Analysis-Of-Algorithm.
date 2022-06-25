@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+int binary(int a[],int k,int n,int cnt,int l,int u,int &flag)
+{
+    if(l>=u)
+    {
+        cnt++;
+        if(a[l]==k)
+        {
+            flag=1;
+        }
+        return cnt;
+    }
+    else
+    {
+        int mid;
+        mid=(l+u)/2;
+        cnt=binary(a,k,n,cnt,l,mid,flag);
+        cnt=binary(a,k,n,cnt,mid+1,u,flag);
+    }
+    return cnt;
+}
+int main()
+{
+    int t;
+    int a[100];
+    int n;
+    int k;
+    int cnt=0;
+    cin>>t;
+    int flag=0;
+    while(t)
+    {
+      cin>>n;
+      for(int i=0;i<n;i++)
+      {
+          cin>>a[i];
+      }
+      cin>>k;
+      cnt=binary(a,k,n,cnt,0,n-1,flag);
+      if(flag==1)
+      {
+          cout<<k<<" is present in array and total comparision is equal to::"<<cnt;
+      }
+      else
+      {
+          cout<<"\n Key not found in the array and total comparision is equal to:::::"<<cnt;
+      }
+      t--;
+    }
+    return 0;
+}
