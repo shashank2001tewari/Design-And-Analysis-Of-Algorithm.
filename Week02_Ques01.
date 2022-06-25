@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+int binary(int a[],int k,int n,int cnt,int l,int u)
+{
+    if(l>=u)
+    {
+        if(a[l]==k)
+        {
+            cnt++;
+        }
+        return cnt;
+    }
+    else
+    {
+        int mid;
+        mid=(l+u)/2;
+        cnt=binary(a,k,n,cnt,l,mid);
+        cnt=binary(a,k,n,cnt,mid+1,u);
+    }
+    return cnt;
+}
+int main()
+{
+    int t;
+    int a[100];
+    int n;
+    int k;
+    int cnt=0;
+    cin>>t;
+    while(t)
+    {
+      cin>>n;
+      for(int i=0;i<n;i++)
+      {
+          cin>>a[i];
+      }
+      cin>>k;
+      cnt=binary(a,k,n,cnt,0,n-1);
+      if(cnt)
+      {
+          cout<<k<<"-"<<cnt;
+      }
+      else
+      {
+          cout<<"\n Key not found in the array:::::";
+      }
+      t--;
+    }
+    return 0;
+}
