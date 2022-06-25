@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+void merge(int a[],int l,int mid,int u)
+{ 
+int T[100];
+int k=0;
+int i=l;
+int j=mid+1;
+while(i<=mid&&j<=u)
+{
+    if(a[i]<a[j])
+    {
+        T[k]=a[i];
+        i++;
+        k++;
+    }
+    else
+    {
+        T[k]=a[j];
+        j++;
+        k++;
+    }
+}
+while(i<=mid)
+{
+
+        T[k]=a[i];
+        i++;
+        k++;
+    
+}
+while(j<=u)
+{
+
+        T[k]=a[j];
+        j++;
+        k++;
+    
+}
+for(int i = 0 ; i< k ; i++) 
+{
+    a[i+l]= T[i];
+    
+}
+return;
+}
+void binary(int a[],int k,int n,int &cnt,int l,int u)
+{
+    if(l>=u)
+    {
+        if(a[l]==k)
+        {
+            cnt++;
+        }
+        return;
+    }
+    else
+    {
+        int mid;
+        mid=(l+u)/2;
+        binary(a,k,n,cnt,l,mid);
+        binary(a,k,n,cnt,mid+1,u);
+    }
+    return;
+}
+void sort(int a[],int l,int u)
+{
+    int mid;
+    if(l>=u)
+    {
+        return;
+    }
+    mid=(l+u)/2;
+    sort(a,l,mid);
+    sort(a,mid+1,u);
+    merge(a,l,mid,u);
+}
+int main()
+{
+    int n;
+    int t;
+    cin>>t;
+    int a[100];
+    while(t)
+    {
+    cin>>n;
+    int cnt;
+    for(int p=0;p<n;p++)
+    {
+        cin>>a[p];
+    }
+    sort(a,0,n-1);
+    for(int j=0;j<n;j++)
+    {
+        cout<<a[j];
+    }
+    cout<<"\n";
+    int k;
+    cin>>k;
+    int t1;
+    for(int i=0;i<n;i++)
+    { 
+       t1=k-a[i];
+       if(t1<a[i])
+       {
+           continue;
+       }
+        cnt=0;
+        binary(a,t1,n,cnt,0,n-1);
+        if(cnt)
+        {
+        cout<<a[i]<<t1;    
+        }
+    }
+    
+    t--;
+}
+return 0;    
+}
