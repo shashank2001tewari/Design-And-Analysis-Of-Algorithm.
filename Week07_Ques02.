@@ -27,12 +27,6 @@ void Union(int a,int b)
      sz[a]+=sz[b];
     }
 }
-bool cmp(pair<int,pair<int,int> >t1,pair<int,pair<int,int> >t2)
-{
-    int a=t1.first;
-     int b=t2.first;
-    return(a>b);
-}
 int main()
 {
     vii edges;
@@ -46,7 +40,7 @@ int main()
         cin>>w;
         edges.push_back(make_pair(w,make_pair(x,y)));
     }
-    sort(edges.begin(),edges.end(),cmp);
+    sort(edges.begin(),edges.end());
     for(int i=1;i<=n;i++)
     {
         make(i);
@@ -60,7 +54,7 @@ int main()
         Union(u,v);
         total_cost+=wt;
         cout<<u<<" "<<v<<endl;
-    }  
+    }
     cout<<total_cost<<endl;
 return 0;
 }
