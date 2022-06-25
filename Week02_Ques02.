@@ -1,52 +1,51 @@
 #include<iostream>
+#include<utility>
 using namespace std;
-int binary(int a[],int k,int n,int cnt,int l,int u,int &flag)
-{
-    if(l>=u)
-    {
-        cnt++;
-        if(a[l]==k)
-        {
-            flag=1;
-        }
-        return cnt;
-    }
-    else
-    {
-        int mid;
-        mid=(l+u)/2;
-        cnt=binary(a,k,n,cnt,l,mid,flag);
-        cnt=binary(a,k,n,cnt,mid+1,u,flag);
-    }
-    return cnt;
-}
 int main()
 {
-    int t;
-    int a[100];
-    int n;
-    int k;
-    int cnt=0;
-    cin>>t;
-    int flag=0;
-    while(t)
+    pair<int,int>l[6];
+    int p;
+    cin>>p;
+    while(p)
     {
-      cin>>n;
-      for(int i=0;i<n;i++)
-      {
-          cin>>a[i];
-      }
-      cin>>k;
-      cnt=binary(a,k,n,cnt,0,n-1,flag);
-      if(flag==1)
-      {
-          cout<<k<<" is present in array and total comparision is equal to::"<<cnt;
-      }
-      else
-      {
-          cout<<"\n Key not found in the array and total comparision is equal to:::::"<<cnt;
-      }
-      t--;
+    int n;
+    cout<<"\n Enter number of element array::";
+    cin>>n;
+    int a[100];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
     }
-    return 0;
+    int k;
+    cout<<"\n Enter the key to be searched::";
+    cin>>k;
+    int w=0;
+    int sum=0;
+    int m=0,t=n-1;
+    while(m<=t)
+    {
+    sum=a[m]+a[t];
+    if(sum==k)
+     { 
+       l[w]={a[m],a[t]};
+       m++;
+       t--;
+       w++;
+     }
+    else if(sum<k)
+     {
+        m++;
+     }
+    else
+     { 
+        t--;
+     }
+    }
+   for(int j=0;j<w;j++)
+   {
+       cout<<l[j].first<<","<<l[j].second<<" ";
+   }
+   p--;
 }
+   return 0;    
+}6
